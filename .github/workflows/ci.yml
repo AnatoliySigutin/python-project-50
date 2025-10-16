@@ -28,8 +28,19 @@ jobs:
           echo "Removing virtual environments..."
           rm -rf env .venv venv
 
-      - name: Install dependencies and build
+      - name: Create virtual environment
         run: |
+          python -m venv .venv
+
+      - name: Install dependencies
+        run: |
+          source .venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt  # добавьте, если есть requirements.txt
+
+      - name: Build project
+        run: |
+          source .venv/bin/activate
           pip install --upgrade build
           python -m build
 
@@ -39,18 +50,24 @@ jobs:
 
       - name: Install the latest wheel
         run: |
+          source .venv/bin/activate
           pip install dist/*.whl
 
       - name: Run lint (ruff)
-        run: make lint
+        run: |
+          source .venv/bin/activate
+          make lint
 
       - name: Run tests with coverage
-        run: pytest --cov=your_package_name --cov-report=xml
+        run: |
+          source .venv/bin/activate
+          pytest --cov=your_package_name --cov-report=xml
 
       - name: SonarQube Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
+          source .venv/bin/activate
           sonar-scanner \
             -Dsonar.projectKey=your_project_key \
             -Dsonar.organization=your_org \
