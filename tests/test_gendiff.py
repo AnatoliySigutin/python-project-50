@@ -1,10 +1,10 @@
-import pytest
 from program_command.gendiff.compare import generate_diff
 
 # Пути к тестовым файлам
 file1 = 'tests/test_data/file1.json'
 file2 = 'tests/test_data/file2.json'
 file3 = 'tests/test_data/file3.json'
+
 
 def test_generate_diff_json():
     expected = '''{
@@ -19,6 +19,7 @@ def test_generate_diff_json():
     # Сравниваем построчно
     assert result.splitlines() == expected.splitlines()
 
+
 def test_generate_diff_with_file3():
     # Тест сравнения file1 и file3
     expected = '''{
@@ -29,6 +30,7 @@ def test_generate_diff_with_file3():
 }'''
     result = generate_diff(file1, file3)
     assert result.splitlines() == expected.splitlines()
+
 
 def test_generate_diff_identical_files():
     # Тест сравнения одного и того же файла
