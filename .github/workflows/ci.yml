@@ -21,7 +21,7 @@ jobs:
       - name: Check for symbolic links
         run: |
           echo "Finding non-symlink files inside python-project-50..."
-          find ./python-project-50 ! -type l ! -path "./python-project-50/.venv/*"
+          find ./python-project-50 ! -type l
 
       - name: Install dependencies
         run: |
