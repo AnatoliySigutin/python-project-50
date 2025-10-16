@@ -32,11 +32,12 @@ jobs:
         run: |
           python -m venv .venv
 
-      - name: Install dependencies from pyproject.toml
+      - name: Install dependencies from pyproject.toml and ruff
         run: |
           source .venv/bin/activate
           pip install --upgrade pip
-          pip install .
+          pip install .  # Установка зависимостей проекта
+          pip install ruff  # Установка ruff для проверки кода
 
       - name: Build project
         run: |
@@ -53,9 +54,10 @@ jobs:
           source .venv/bin/activate
           pip install dist/*.whl
 
-      - name: Run lint (ruff)
+      - name: Run lint via make
         run: |
-          bash -c 'source .venv/bin/activate && ruff check .'
+          source .venv/bin/activate
+          make lint
 
       - name: Run tests with coverage
         run: |
@@ -66,8 +68,9 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          bash -c 'source .venv/bin/activate && sonar-scanner \
+          source .venv/bin/activate
+          sonar-scanner \
             -Dsonar.projectKey=your_project_key \
             -Dsonar.organization=your_org \
             -Dsonar.host.url=https://your-sonar-instance \
-            -Dsonar.login=$SONAR_TOKEN'
+            -Dsonar.login=$SONAR_TOKEN
