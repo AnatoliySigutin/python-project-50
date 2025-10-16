@@ -32,11 +32,11 @@ jobs:
         run: |
           python -m venv .venv
 
-      - name: Install dependencies
+      - name: Install dependencies from pyproject.toml
         run: |
           source .venv/bin/activate
           pip install --upgrade pip
-          pip install -r requirements.txt  # добавьте, если есть requirements.txt
+          pip install .
 
       - name: Build project
         run: |
