@@ -1,0 +1,46 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Check for symbolic links
+        run: |
+          echo "Finding non-symlink files inside python-project-50..."
+          find . ! -type l
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade build
+          python -m build
+          pip install dist/*.whl
+
+      - name: Run lint (ruff)
+        run: make lint
+
+      - name: Run tests with coverage
+        run: pytest --cov=your_package_name --cov-report=xml
+
+      - name: SonarQube Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=your_project_key \
+            -Dsonar.organization=your_org \
+            -Dsonar.host.url=https://your-sonar-instance \
+            -Dsonar.login=$SONAR_TOKEN
