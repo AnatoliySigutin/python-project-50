@@ -32,12 +32,12 @@ jobs:
         run: |
           python -m venv .venv
 
-      - name: Install dependencies from pyproject.toml and ruff, pytest, pytest-cov
+      - name: Install dependencies from pyproject.toml and tools
         run: |
           source .venv/bin/activate
           pip install --upgrade pip
           pip install .  # Установка зависимостей проекта
-          pip install ruff pytest pytest-cov  # Установка необходимых инструментов
+          pip install ruff pytest pytest-cov  # Установка инструментов
 
       - name: Build project
         run: |
@@ -63,6 +63,13 @@ jobs:
         run: |
           source .venv/bin/activate
           pytest --cov=your_package_name --cov-report=xml
+
+      - name: Download SonarQube Scanner
+        run: |
+          wget -O sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner/sonar-scanner-cli-4.6.2.2472.zip
+          unzip -q sonar-scanner.zip -d $HOME
+          mv $HOME/sonar-scanner-4.6.2.2472 $HOME/sonar-scanner
+          echo "$HOME/sonar-scanner/bin" >> $GITHUB_PATH
 
       - name: SonarQube Scan
         env:
