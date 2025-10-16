@@ -55,8 +55,7 @@ jobs:
 
       - name: Run lint (ruff)
         run: |
-          source .venv/bin/activate
-          make lint
+          bash -c 'source .venv/bin/activate && ruff check .'
 
       - name: Run tests with coverage
         run: |
@@ -67,9 +66,8 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          source .venv/bin/activate
-          sonar-scanner \
+          bash -c 'source .venv/bin/activate && sonar-scanner \
             -Dsonar.projectKey=your_project_key \
             -Dsonar.organization=your_org \
             -Dsonar.host.url=https://your-sonar-instance \
-            -Dsonar.login=$SONAR_TOKEN
+            -Dsonar.login=$SONAR_TOKEN'
