@@ -13,34 +13,61 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Set up Python 3.12
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.12'
 
       - name: Check for symbolic links
         run: |
           echo "Finding non-symlink files inside python-project-50..."
           find . ! -type l
 
-      - name: Install dependencies
+      - name: Remove virtual environments
         run: |
+          echo "Removing virtual environments..."
+          rm -rf env .venv venv
+
+      - name: Create virtual environment
+        run: |
+          python -m venv .venv
+
+      - name: Install dependencies from pyproject.toml
+        run: |
+          source .venv/bin/activate
+          pip install --upgrade pip
+          pip install .
+
+      - name: Build project
+        run: |
+          source .venv/bin/activate
           pip install --upgrade build
           python -m build
+
+      - name: Remove old wheel files, keep only the latest
+        run: |
+          ls -t dist/*.whl | tail -n +2 | xargs -r rm --
+
+      - name: Install the latest wheel
+        run: |
+          source .venv/bin/activate
           pip install dist/*.whl
 
       - name: Run lint (ruff)
-        run: make lint
+        run: |
+          bash -c 'source .venv/bin/activate && ruff check .'
 
       - name: Run tests with coverage
-        run: pytest --cov=your_package_name --cov-report=xml
+        run: |
+          source .venv/bin/activate
+          pytest --cov=your_package_name --cov-report=xml
 
       - name: SonarQube Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          sonar-scanner \
+          bash -c 'source .venv/bin/activate && sonar-scanner \
             -Dsonar.projectKey=your_project_key \
             -Dsonar.organization=your_org \
             -Dsonar.host.url=https://your-sonar-instance \
-            -Dsonar.login=$SONAR_TOKEN
+            -Dsonar.login=$SONAR_TOKEN'
