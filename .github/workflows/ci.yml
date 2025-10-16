@@ -23,6 +23,11 @@ jobs:
           echo "Finding non-symlink files inside python-project-50..."
           find . ! -type l
 
+      - name: Remove virtual environments
+        run: |
+          echo "Removing virtual environments..."
+          rm -rf env .venv venv
+
       - name: Install dependencies
         run: |
           pip install --upgrade build
