@@ -1,12 +1,14 @@
 import json
 
+
 def load_json(filename):
     """Загружает JSON-файл и возвращает словарь."""
-    with open(filename, 'r', encoding='utf-8') as file:
+    with open(filename, "r", encoding="utf-8") as file:
         return json.load(file)
 
+
 def generate_diff(file1, file2):
-    """Генерирует отчёт о различиях между двумя JSON-файлами."""
+    
     data1 = load_json(file1)
     data2 = load_json(file2)
 
@@ -27,11 +29,8 @@ def generate_diff(file1, file2):
             else:
                 results.append(f"- {key}: {val1}\n+ {key}: {val2}")
         else:
-            # Если ключ общий и значения совпадают, добавляем его в результат
+            
             results.append(f"  {key}: {val1}")
 
     output = "{}\n{}\n{}".format("{", "\n".join(results), "}")
     return output
-
-
-
