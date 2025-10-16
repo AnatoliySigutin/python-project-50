@@ -1,0 +1,5 @@
+exclude venv/**/*
+exclude .venv/**/*
+exclude env/**/*
+exclude .env/**/*
+exclude **/lib64/**
