@@ -32,12 +32,12 @@ jobs:
         run: |
           python -m venv .venv
 
-      - name: Install dependencies from pyproject.toml and ruff
+      - name: Install dependencies from pyproject.toml and ruff, pytest, pytest-cov
         run: |
           source .venv/bin/activate
           pip install --upgrade pip
           pip install .  # Установка зависимостей проекта
-          pip install ruff  # Установка ruff для проверки кода
+          pip install ruff pytest pytest-cov  # Установка необходимых инструментов
 
       - name: Build project
         run: |
