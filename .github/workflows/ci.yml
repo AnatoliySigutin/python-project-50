@@ -18,6 +18,11 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Check for symbolic links to ignore
+        run: |
+          echo "Finding non-symlink files..."
+          find python-project-50 ! -type l ! -path "python-project-50/.venv/*" ! -path "python-project-50/env/*"
+
       - name: Install dependencies
         run: |
           pip install --upgrade build
