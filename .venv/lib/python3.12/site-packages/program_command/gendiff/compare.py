@@ -1,16 +1,25 @@
 import json
+import yaml
+import os
 
-
-def load_json(filename):
-    """Загружает JSON-файл и возвращает словарь."""
+def load_json_or_yaml(filename):
+    """Загружает JSON или YAML файл в зависимости от расширения."""
+    ext = os.path.splitext(filename)[1].lower()
     with open(filename, "r", encoding="utf-8") as file:
-        return json.load(file)
-
+        content = file.read()
+        if not content.strip():
+            raise ValueError(f"Файл {filename} пустой")
+        # Возвращаем содержимое для дальнейшей обработки
+        if ext in ['.json']:
+            return json.loads(content)
+        elif ext in ['.yml', '.yaml']:
+            return yaml.safe_load(content)
+        else:
+            raise ValueError(f"Unsupported file extension: {ext}")
 
 def generate_diff(file1, file2):
-    
-    data1 = load_json(file1)
-    data2 = load_json(file2)
+    data1 = load_json_or_yaml(file1)
+    data2 = load_json_or_yaml(file2)
 
     # Определяем все ключи
     all_keys = set(data1.keys()) | set(data2.keys())
@@ -29,7 +38,6 @@ def generate_diff(file1, file2):
             else:
                 results.append(f"- {key}: {val1}\n+ {key}: {val2}")
         else:
-            
             results.append(f"  {key}: {val1}")
 
     output = "{}\n{}\n{}".format("{", "\n".join(results), "}")

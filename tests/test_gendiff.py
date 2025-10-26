@@ -4,7 +4,9 @@ from program_command.gendiff.compare import generate_diff
 file1 = 'tests/test_data/file1.json'
 file2 = 'tests/test_data/file2.json'
 file3 = 'tests/test_data/file3.json'
-
+file4 = 'tests/test_data/file1.yaml'
+file5 = 'tests/test_data/file2.yaml'
+file6 = 'tests/test_data/file3.yaml'
 
 def test_generate_diff_json():
     expected = '''{
@@ -43,3 +45,38 @@ def test_generate_diff_identical_files():
     result = generate_diff(file1, file1)
     assert result.splitlines() == expected.splitlines()
 
+
+def test_generate_diff_yaml():
+    expected = '''{
+- follow: False
+  host: hexlet.io
+- proxy: 123.234.53.22
+- timeout: 50
++ timeout: 20
++ verbose: True
+}'''
+    result = generate_diff(file4, file5)
+
+    assert result.splitlines() == expected.splitlines()
+
+
+def test_generate_diff_with_file3_yaml():
+    expected = '''{
+- follow: False
+  host: hexlet.io
+- proxy: 123.234.53.22
+  timeout: 50
+}'''
+    result = generate_diff(file4, file6)
+    assert result.splitlines() == expected.splitlines()
+
+
+def test_generate_diff_identical_files_yaml():
+    expected = '''{
+  follow: False
+  host: hexlet.io
+  proxy: 123.234.53.22
+  timeout: 50
+}'''
+    result = generate_diff(file4, file4)
+    assert result.splitlines() == expected.splitlines()
