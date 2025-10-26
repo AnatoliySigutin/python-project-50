@@ -22,52 +22,37 @@ jobs:
         run: |
           echo "Finding non-symlink files inside python-project-50..."
           find . ! -type l
-
       - name: Remove virtual environments
         run: |
           echo "Removing virtual environments..."
           rm -rf env .venv venv
-
       - name: Create virtual environment
         run: |
           python -m venv .venv
-
-      - name: Install dependencies from pyproject.toml
+      - name: Install dependencies from pyproject.toml and tools
         run: |
           source .venv/bin/activate
           pip install --upgrade pip
-          pip install .
-
+          pip install .  # Установка зависимостей проекта
+          pip install ruff pytest pytest-cov  # Установка инструментов
       - name: Build project
         run: |
           source .venv/bin/activate
           pip install --upgrade build
           python -m build
-
       - name: Remove old wheel files, keep only the latest
         run: |
           ls -t dist/*.whl | tail -n +2 | xargs -r rm --
-
       - name: Install the latest wheel
         run: |
           source .venv/bin/activate
           pip install dist/*.whl
-
-      - name: Run lint (ruff)
+      - name: Run lint via make
         run: |
-          bash -c 'source .venv/bin/activate && ruff check .'
-
+          source .venv/bin/activate
+          make lint
       - name: Run tests with coverage
         run: |
           source .venv/bin/activate
           pytest --cov=your_package_name --cov-report=xml
-
-      - name: SonarQube Scan
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          bash -c 'source .venv/bin/activate && sonar-scanner \
-            -Dsonar.projectKey=your_project_key \
-            -Dsonar.organization=your_org \
-            -Dsonar.host.url=https://your-sonar-instance \
-            -Dsonar.login=$SONAR_TOKEN'
+      # Удалены шаги с SonarQube
