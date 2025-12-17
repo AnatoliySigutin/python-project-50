@@ -1,6 +1,5 @@
 import argparse
 
-
 def gendiff_h():
     # Создаем объект парсера
     parser = argparse.ArgumentParser(
