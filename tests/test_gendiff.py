@@ -9,7 +9,8 @@ file5 = 'tests/test_data/file2.yaml'
 file6 = 'tests/test_data/file3.yaml'
 file7 = 'tests/test_data/file_1.yaml'
 file8 = 'tests/test_data/file_2.yaml'
-
+file9 = 'tests/test_data/file_1.json'
+file10 = 'tests/test_data/file_2.json'
 
 def test_generate_diff_json():
     expected = '''{
@@ -128,3 +129,19 @@ def test_generate_diff_different_file_1_and_file_3_yaml():
 }'''
     result = generate_diff(file7, file8)
     assert result == expected
+
+
+def test_plain_format():
+    excepted = '''Property 'common.follow' was added with value: false
+Property 'common.setting2' was removed
+Property 'common.setting3' was updated. From true to null
+Property 'common.setting4' was added with value: 'blah blah'
+Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.doge.wow' was updated. From '' to 'so much'
+Property 'common.setting6.ops' was added with value: 'vops'
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group1.nest' was updated. From [complex value] to 'str'
+Property 'group2' was removed
+Property 'group3' was added with value: [complex value]'''  
+    result = generate_diff(file9, file10, format_name='plain')
+    assert result == excepted

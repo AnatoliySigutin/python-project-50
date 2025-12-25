@@ -1,25 +1,25 @@
 import argparse
 
 def gendiff_h():
-    # Создаем объект парсера
     parser = argparse.ArgumentParser(
-        description="Compares two configuration files and shows a difference."
+        description="Comparing two configuration files and showing differences."
     )
 
-    # Позиционные аргументы (обязательные)
-    parser.add_argument("-f", "--format", 
-                        metavar="FORMAT", 
-                        help="set format of output")
+    parser.add_argument("first_file", help="First file to compare")
+    parser.add_argument("second_file", help="Second file to compare")
+    parser.add_argument(
+        "-f",
+        "--format",
+        metavar="FORMAT",
+        default="stylish",
+        choices=["stylish", "plain", "json"],
+        help='set format of output (default: stylish)',
+    )
 
-    parser.add_argument("first_file")
-    parser.add_argument("second_file")
-
-    # Опция помощи (-h, --help) добавляется автоматически
-
-    # Парсим аргументы
     args = parser.parse_args()
 
     print(
-        f"Processing comparison between '{args.first_file}'"
+        f"Processing comparison between '{args.first_file}' "
         f"and '{args.second_file}'."
+        f" Selected format: {args.format}"
     )
