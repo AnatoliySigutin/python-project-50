@@ -145,3 +145,107 @@ Property 'group2' was removed
 Property 'group3' was added with value: [complex value]'''  
     result = generate_diff(file9, file10, format_name='plain')
     assert result == excepted
+
+
+
+def test_json_format(): 
+    excepted = '''{
+    "common": {
+        "type": "nested",
+        "children": {
+            "follow": {
+                "type": "added",
+                "value": false
+            },
+            "setting1": {
+                "type": "unchanged",
+                "value": "Value 1"
+            },
+            "setting2": {
+                "type": "removed",
+                "value": 200
+            },
+            "setting3": {
+                "type": "updated",
+                "old_value": true,
+                "new_value": null
+            },
+            "setting4": {
+                "type": "added",
+                "value": "blah blah"
+            },
+            "setting5": {
+                "type": "added",
+                "value": {
+                    "key5": "value5"
+                }
+            },
+            "setting6": {
+                "type": "nested",
+                "children": {
+                    "doge": {
+                        "type": "nested",
+                        "children": {
+                            "wow": {
+                                "type": "updated",
+                                "old_value": "",
+                                "new_value": "so much"
+                            }
+                        }
+                    },
+                    "key": {
+                        "type": "unchanged",
+                        "value": "value"
+                    },
+                    "ops": {
+                        "type": "added",
+                        "value": "vops"
+                    }
+                }
+            }
+        }
+    },
+    "group1": {
+        "type": "nested",
+        "children": {
+            "baz": {
+                "type": "updated",
+                "old_value": "bas",
+                "new_value": "bars"
+            },
+            "foo": {
+                "type": "unchanged",
+                "value": "bar"
+            },
+            "nest": {
+                "type": "updated",
+                "old_value": {
+                    "key": "value"
+                },
+                "new_value": "str"
+            }
+        }
+    },
+    "group2": {
+        "type": "removed",
+        "value": {
+            "abc": 12345,
+            "deep": {
+                "id": 45
+            }
+        }
+    },
+    "group3": {
+        "type": "added",
+        "value": {
+            "deep": {
+                "id": {
+                    "number": 45
+                }
+            },
+            "fee": 100500
+        }
+    }
+}'''
+    result = generate_diff(file9, file10, format_name='json')
+    assert result == excepted
