@@ -25,9 +25,9 @@ build-backend = "hatchling.build"
 
 
 [tool.hatch.build.targets.wheel]
-packages = ["program_command"]
+packages = ["gendiff"]
 
 
 [project.scripts]
-gendiff = 'program_command.gendiff.scripts.gendiff_compare:main'
-gendiff-h = 'program_command.gendiff.scripts.gendiff_h:main'
+gendiff = 'gendiff.programm_command.scripts.gendiff_compare:main'
+gendiff-h = 'gendiff.programm_command.scripts.gendiff_h:main'

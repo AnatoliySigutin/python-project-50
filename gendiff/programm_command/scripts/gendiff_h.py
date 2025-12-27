@@ -1,4 +1,4 @@
-from program_command.gendiff.main import gendiff_h
+from gendiff.programm_command.main import gendiff_h
 import argparse
 
 

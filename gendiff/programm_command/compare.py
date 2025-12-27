@@ -1,9 +1,9 @@
-from program_command.type_mapper import JsonDict
-from program_command.gendiff.parser import load_json_or_yaml
-from program_command.gendiff.generate_builder import build_diff
-from program_command.gendiff.formatters.stylish import format_stylish
-from program_command.gendiff.formatters.plain import format_plain
-from program_command.gendiff.formatters.json import json_format
+from gendiff.type_mapper import JsonDict
+from gendiff.programm_command.parser import load_json_or_yaml
+from gendiff.programm_command.generate_builder import build_diff
+from gendiff.programm_command.formatters.stylish import format_stylish
+from gendiff.programm_command.formatters.plain import format_plain
+from gendiff.programm_command.formatters.json import json_format
 
 
 

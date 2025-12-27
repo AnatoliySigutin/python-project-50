@@ -1,5 +1,5 @@
 import argparse
-from program_command.gendiff.compare import generate_diff
+from gendiff.programm_command.compare import generate_diff
 
 def main():
     # Парсер аргументов
