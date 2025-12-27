@@ -1,40 +1,57 @@
+def format_value(value):
+    """Format a value for plain output."""
+    if value is None:
+        return "null"
+    elif isinstance(value, bool):
+        return str(value).lower()
+    elif isinstance(value, (dict, list)):
+        return "[complex value]"
+    elif isinstance(value, str):
+        return f"'{value}'"
+    else:
+        return str(value)
+
+
+def format_added(value, property_path):
+    """Format 'added' status."""
+    val_repr = format_value(value.get("value"))
+    return f"Property '{property_path}' was added with value: {val_repr}"
+
+
+def format_removed(property_path):
+    """Format 'removed' status."""
+    return f"Property '{property_path}' was removed"
+
+
+def format_updated(value, property_path):
+    """Format 'updated' status."""
+    old_val_repr = format_value(value.get("old_value"))
+    new_val_repr = format_value(value.get("new_value"))
+    return (
+        f"Property '{property_path}' was updated. From "
+        f"{old_val_repr} to {new_val_repr}"
+    )
+
+
+def recurse(node, lines, path=""):
+    """Recursively process diff tree."""
+    for key, value in node.items():
+        property_path = f"{path}.{key}" if path else key
+        status = value["status"]
+
+        if status == "nested":
+            recurse(value["children"], lines, property_path)
+        elif status == "removed":
+            lines.append(format_removed(property_path))
+        elif status == "added":
+            lines.append(format_added(value, property_path))
+        elif status == "updated":
+            lines.append(format_updated(value, property_path))
+        # 'unchanged' игнорируем в plain формате
+
+
 def format_plain(diff_tree):
-    def format_value(value):
-        if value is None:
-            return "null"
-        elif isinstance(value, bool):
-            return str(value).lower()
-        elif isinstance(value, (dict, list)):
-            return "[complex value]"
-        elif isinstance(value, str):
-            return f"'{value}'"
-        else:
-            return str(value)
-
+    """Format diff tree as plain text."""
     lines = []
-
-    def recurse(node, path=""):
-        for key, value in node.items():
-            property_path = f"{path}.{key}" if path else key
-            status = value["status"]
-
-            if status == "nested":
-                recurse(value["children"], property_path)
-            elif status == "removed":
-                lines.append(f"Property '{property_path}' was removed")
-            elif status == "added":
-                # Используем 'value' вместо 'new_value'
-                val_repr = format_value(value.get("value"))
-                lines.append(
-                    f"Property '{property_path}' was added with value: {val_repr}"
-                )
-            elif status == "updated":
-                old_val_repr = format_value(value.get("old_value"))
-                new_val_repr = format_value(value.get("new_value"))
-                lines.append(
-                    f"Property '{property_path}' was updated. From {old_val_repr} to {new_val_repr}"
-                )
-            # 'unchanged' игнорируем в plain формате
-
-    recurse(diff_tree)
+    recurse(diff_tree, lines)
     return "\n".join(lines)
