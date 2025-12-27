@@ -1,5 +1,6 @@
 import argparse
 
+
 def gendiff_h():
     parser = argparse.ArgumentParser(
         description="Comparing two configuration files and showing differences."
@@ -13,7 +14,7 @@ def gendiff_h():
         metavar="FORMAT",
         default="stylish",
         choices=["stylish", "plain", "json"],
-        help='set format of output (default: stylish)',
+        help="set format of output (default: stylish)",
     )
 
     args = parser.parse_args()

@@ -1,89 +1,90 @@
 from gendiff.programm_command.compare import generate_diff
 
 # Пути к тестовым файлам
-file1 = 'tests/test_data/file1.json'
-file2 = 'tests/test_data/file2.json'
-file3 = 'tests/test_data/file3.json'
-file4 = 'tests/test_data/file1.yaml'
-file5 = 'tests/test_data/file2.yaml'
-file6 = 'tests/test_data/file3.yaml'
-file7 = 'tests/test_data/file_1.yaml'
-file8 = 'tests/test_data/file_2.yaml'
-file9 = 'tests/test_data/file_1.json'
-file10 = 'tests/test_data/file_2.json'
+file1 = "tests/test_data/file1.json"
+file2 = "tests/test_data/file2.json"
+file3 = "tests/test_data/file3.json"
+file4 = "tests/test_data/file1.yaml"
+file5 = "tests/test_data/file2.yaml"
+file6 = "tests/test_data/file3.yaml"
+file7 = "tests/test_data/file_1.yaml"
+file8 = "tests/test_data/file_2.yaml"
+file9 = "tests/test_data/file_1.json"
+file10 = "tests/test_data/file_2.json"
+
 
 def test_generate_diff_json():
-    expected = '''{
+    expected = """{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
   - timeout: 50
   + timeout: 20
   + verbose: true
-}'''
+}"""
     result = generate_diff(file1, file2)
     assert result == expected
 
 
 def test_generate_diff_with_file3():
-    expected = '''{
+    expected = """{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
     timeout: 50
-}'''
+}"""
     result = generate_diff(file1, file3)
     assert result == expected
 
 
 def test_generate_diff_identical_files():
-    expected = '''{
+    expected = """{
     follow: false
     host: hexlet.io
     proxy: 123.234.53.22
     timeout: 50
-}'''
+}"""
     result = generate_diff(file1, file1)
     assert result == expected
 
 
 def test_generate_diff_yaml():
-    expected = '''{
+    expected = """{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
   - timeout: 50
   + timeout: 20
   + verbose: true
-}'''
+}"""
     result = generate_diff(file4, file5)
     assert result == expected
 
 
 def test_generate_diff_with_file3_yaml():
-    expected = '''{
+    expected = """{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
     timeout: 50
-}'''
+}"""
     result = generate_diff(file4, file6)
     assert result == expected
 
 
 def test_generate_diff_identical_files_yaml():
-    expected = '''{
+    expected = """{
     follow: false
     host: hexlet.io
     proxy: 123.234.53.22
     timeout: 50
-}'''
+}"""
     result = generate_diff(file4, file4)
     assert result == expected
 
 
 def test_generate_diff_different_file_1_and_file_3_yaml():
-    expected = '''{
+    expected = """{
     common: {
       + follow: false
         setting1: Value 1
@@ -126,13 +127,13 @@ def test_generate_diff_different_file_1_and_file_3_yaml():
         }
         fee: 100500
     }
-}'''
+}"""
     result = generate_diff(file7, file8)
     assert result == expected
 
 
 def test_plain_format():
-    excepted = '''Property 'common.follow' was added with value: false
+    excepted = """Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From true to null
 Property 'common.setting4' was added with value: 'blah blah'
@@ -142,14 +143,13 @@ Property 'common.setting6.ops' was added with value: 'vops'
 Property 'group1.baz' was updated. From 'bas' to 'bars'
 Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
-Property 'group3' was added with value: [complex value]'''  
-    result = generate_diff(file9, file10, format_name='plain')
+Property 'group3' was added with value: [complex value]"""
+    result = generate_diff(file9, file10, format_name="plain")
     assert result == excepted
 
 
-
-def test_json_format(): 
-    excepted = '''{
+def test_json_format():
+    excepted = """{
     "common": {
         "type": "nested",
         "children": {
@@ -246,6 +246,6 @@ def test_json_format():
             "fee": 100500
         }
     }
-}'''
-    result = generate_diff(file9, file10, format_name='json')
+}"""
+    result = generate_diff(file9, file10, format_name="json")
     assert result == excepted

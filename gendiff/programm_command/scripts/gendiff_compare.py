@@ -1,6 +1,7 @@
 import argparse
 from gendiff.programm_command.compare import generate_diff
 
+
 def main():
     # Парсер аргументов
     parser = argparse.ArgumentParser(
@@ -10,11 +11,12 @@ def main():
     parser.add_argument("first_file", type=str)
     parser.add_argument("second_file", type=str)
     parser.add_argument(
-        "-f", "--format", 
-        metavar="FORMAT", 
-        default="stylish",    # Значение по умолчанию
+        "-f",
+        "--format",
+        metavar="FORMAT",
+        default="stylish",  # Значение по умолчанию
         choices=["stylish", "plain", "json"],  # Варианты форматов
-        help="set format of output (default: stylish)"
+        help="set format of output (default: stylish)",
     )
 
     # Анализируем аргументы
@@ -23,6 +25,7 @@ def main():
     # Передаем выбранный формат в generate_diff
     diff = generate_diff(args.first_file, args.second_file, args.format)
     print(diff)
+
 
 if __name__ == "__main__":
     main()

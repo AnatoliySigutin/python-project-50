@@ -2,6 +2,7 @@ import os
 import json
 import yaml
 
+
 def load_json_or_yaml(filename):
     """Загружает JSON или YAML файл в зависимости от расширения."""
     ext = os.path.splitext(filename)[1].lower()
@@ -10,9 +11,9 @@ def load_json_or_yaml(filename):
         if not content.strip():
             raise ValueError(f"Файл {filename} пустой")
         # Возвращаем содержимое для дальнейшей обработки
-        if ext in ['.json']:
+        if ext in [".json"]:
             return json.loads(content)
-        elif ext in ['.yml', '.yaml']:
+        elif ext in [".yml", ".yaml"]:
             return yaml.safe_load(content)
         else:
             raise ValueError(f"Unsupported file extension: {ext}")

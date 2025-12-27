@@ -1,4 +1,3 @@
-from gendiff.type_mapper import JsonDict
 from gendiff.programm_command.parser import load_json_or_yaml
 from gendiff.programm_command.generate_builder import build_diff
 from gendiff.programm_command.formatters.stylish import format_stylish
@@ -6,19 +5,14 @@ from gendiff.programm_command.formatters.plain import format_plain
 from gendiff.programm_command.formatters.json import json_format
 
 
-
-
-def generate_diff(file_left: str, file_right: str, format_name = "stylish"):
-    
+def generate_diff(file_left: str, file_right: str, format_name="stylish"):
     data1 = load_json_or_yaml(file_left)
     data2 = load_json_or_yaml(file_right)
     diff_tree = build_diff(data1, data2)
 
-    if format_name == 'stylish':
+    if format_name == "stylish":
         return format_stylish(diff_tree)
-    elif format_name == 'plain':
+    elif format_name == "plain":
         return format_plain(diff_tree)
-    elif format_name == 'json':
+    elif format_name == "json":
         return json_format(diff_tree)
-    
-    

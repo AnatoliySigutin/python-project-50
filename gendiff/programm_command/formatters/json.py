@@ -6,33 +6,24 @@ def json_format(diff_tree):
     def recurse(node):
         result = {}
         for key, data in node.items():
-            status = data['status']
-            if status == 'nested':
+            status = data["status"]
+            if status == "nested":
                 result[key] = {
-                    'type': 'nested',
-                    'children': recurse(data['children'])
+                    "type": "nested",
+                    "children": recurse(data["children"]),
                 }
-            elif status == 'removed':
+            elif status == "removed":
+                result[key] = {"type": "removed", "value": data["value"]}
+            elif status == "added":
+                result[key] = {"type": "added", "value": data["value"]}
+            elif status == "updated":
                 result[key] = {
-                    'type': 'removed',
-                    'value': data['value']
+                    "type": "updated",
+                    "old_value": data["old_value"],
+                    "new_value": data["new_value"],
                 }
-            elif status == 'added':
-                result[key] = {
-                    'type': 'added',
-                    'value': data['value']
-                }
-            elif status == 'updated':
-                result[key] = {
-                    'type': 'updated',
-                    'old_value': data['old_value'],
-                    'new_value': data['new_value']
-                }
-            elif status == 'unchanged':
-                result[key] = {
-                    'type': 'unchanged',
-                    'value': data['value']
-                }
+            elif status == "unchanged":
+                result[key] = {"type": "unchanged", "value": data["value"]}
         return result
 
     return json.dumps(recurse(diff_tree), ensure_ascii=False, indent=4)

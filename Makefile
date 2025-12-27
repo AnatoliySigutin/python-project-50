@@ -5,3 +5,6 @@ gendiff:
 
 lint:
 	bash -c 'source .venv/bin/activate && ruff check .'
+
+lint-fix:
+	bash -c 'source .venv/bin/activate && black . && isort .'
