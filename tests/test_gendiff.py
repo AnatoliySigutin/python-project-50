@@ -1,4 +1,4 @@
-from program_command.gendiff.compare import generate_diff
+from gendiff.programm_command.compare import generate_diff
 
 # Пути к тестовым файлам
 file1 = 'tests/test_data/file1.json'
