@@ -43,6 +43,6 @@ jobs:
             -Dsonar.projectKey=AnatoliySigutin_python-project-50
             -Dsonar.python.version=3.12
             -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.exclusions=tests/**,*/tests/** # 
-            -Dsonar.coverage.exclusions=tests/**,*/tests/**
+            -Dsonar.coverage.exclusions=tests/**
+            -Dsonar.exclusions=tests/**
 
