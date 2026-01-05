@@ -1,0 +1,44 @@
+
+
+0int
+#"Format 'updated' status."str
+
+	2int
+'"{indent}+ {key}: {new_value}"str
+"new_value"str
+"old_value"str
+"  "str
+'"{indent}- {key}: {old_value}"strkey# #(node# #(depth# #(#list"Å-
++
+% %(indent"	#binop *#*2*:"
+ 
+& &(."#array-read#:"
+ 
+&0 &(9
+"	#binop +#2+:	Z
+X
+& &(:	old_value";
++gendiff.programm_command.formatters.stylishformat_value:
+"
+ 
+' '(."#array-read#:"
+ 
+'0 '(9"	#binop +#2+:	Z
+X
+' '(:	new_value";
++gendiff.programm_command.formatters.stylishformat_value:'
+%
+( +("#unknown-value#Blist&
+$
+( +("
+#is-exact#:Bbool
+
+( +("
+#assume#:8
+6
+( +("#set-field# __collection_size:Bint&
+$
+( +("#array-add-last#:&
+$
+( +("#array-add-last#:
+( +(*L/home/prank/python-project-50/gendiff/programm_command/formatters/stylish.py

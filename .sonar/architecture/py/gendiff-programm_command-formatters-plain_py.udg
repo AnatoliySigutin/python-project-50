@@ -1,0 +1,58 @@
+
+1.0PythonFrontend"1767619529745*py2.B¹
+
+imports1
+
+extends2
+
+returns3
+
+	has param4
+
+module5
+
+
+class6
+
+function7
+1
+,gendiff/programm_command/formatters/plain.py9
+/
+)gendiff.programm_command.formatters.plain11
+>
+8gendiff.programm_command.formatters.plain.format_updated12
+<
+6gendiff.programm_command.formatters.plain.format_plain14
+7
+1gendiff.programm_command.formatters.plain.recurse16
+<
+6gendiff.programm_command.formatters.plain.format_added18
+>
+8gendiff.programm_command.formatters.plain.format_removed20
+<
+6gendiff.programm_command.formatters.plain.format_value22J
+
+8
+89j¸
+ 
+10
+10115 *
+8 (
+
+13
+13127 210
+
+15
+15147 210
+
+17
+17167 210
+
+19
+19187 210
+
+21
+21207 210
+
+23
+23227 210

@@ -1,0 +1,75 @@
+def format_value(value, depth):
+    """Format a value for stylish output."""
+    if isinstance(value, dict):
+        indent = "  " * depth
+        lines = ["{"]
+        for k, v in sorted(value.items()):
+            formatted_v = format_value(v, depth + 2)
+            lines.append(f"{indent}  {k}: {formatted_v}")
+        lines.append("  " * (depth - 1) + "}")
+        return "\n".join(lines)
+    elif value is None:
+        return "null"
+    elif isinstance(value, bool):
+        return str(value).lower()
+    else:
+        return str(value)
+
+
+def format_nested(key, node, depth):
+    """Format 'nested' status."""
+    indent = "  " * depth
+    lines = [f"{indent}  {key}: {{"]
+    lines.extend(format_diff(node["children"], depth + 2))
+    lines.append(f"{indent}  }}")
+    return lines
+
+
+def format_simple(key, node, depth, prefix):
+    """Format simple statuses with prefix."""
+    indent = "  " * depth
+    value = format_value(node["value"], depth + 2)
+    return [f"{indent}{prefix} {key}: {value}"]
+
+
+def format_updated(key, node, depth):
+    """Format 'updated' status."""
+    indent = "  " * depth
+    old_value = format_value(node["old_value"], depth + 2)
+    new_value = format_value(node["new_value"], depth + 2)
+    return [
+        f"{indent}- {key}: {old_value}",
+        f"{indent}+ {key}: {new_value}"
+    ]
+
+
+FORMATTERS = {
+    "nested": format_nested,
+    "removed": lambda k, n, d: format_simple(k, n, d, "-"),
+    "added": lambda k, n, d: format_simple(k, n, d, "+"),
+    "updated": format_updated,
+    "unchanged": lambda k, n, d: format_simple(k, n, d, " "),
+}
+
+
+def format_diff(diff, depth=1):
+    """Recursively format diff tree using dispatcher."""
+    lines = []
+    
+    for key, node in diff.items():
+        status = node["status"]
+        formatter = FORMATTERS[status]
+        lines.extend(formatter(key, node, depth))
+    
+    return lines
+
+
+def format_stylish(diff_tree):
+    """
+    Форматирует дерево различий в стиле stylish
+    """
+    result_lines = ["{"]
+    result_lines.extend(format_diff(diff_tree))
+    result_lines.append("}")
+    
+    return "\n".join(result_lines)

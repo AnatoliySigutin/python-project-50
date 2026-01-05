@@ -1,0 +1,1 @@
+ 2pyXKhr.gendiff/programm_command/formatters/stylish.py

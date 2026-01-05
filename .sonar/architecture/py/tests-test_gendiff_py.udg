@@ -1,0 +1,81 @@
+
+1.0PythonFrontend"1767619529743*py2.BÅ
+
+imports1
+
+extends2
+
+returns3
+
+	has param4
+
+module5
+
+
+class6
+
+function7
+
+tests/test_gendiff.py9
+
+test_gendiff11
+&
+ gendiff.programm_command.compare12
+#
+test_gendiff.test_json_format14
+*
+$test_gendiff.test_generate_diff_json16
+:
+4test_gendiff.test_generate_diff_identical_files_yaml18
+$
+test_gendiff.test_plain_format20
+*
+$test_gendiff.test_generate_diff_yaml22
+0
+*test_gendiff.test_generate_diff_with_file324
+5
+/test_gendiff.test_generate_diff_with_file3_yaml26
+5
+/test_gendiff.test_generate_diff_identical_files28
+F
+@test_gendiff.test_generate_diff_different_file_1_and_file_3_yaml30J
+
+8
+89jñ
+ 
+10
+10115 *
+8 (
+
+13
+13125
+
+15
+15147 210
+
+17
+17167 210
+
+19
+19187 210
+
+21
+21207 210
+
+23
+23227 210
+
+25
+25247 210
+
+27
+27267 210
+
+29
+29287 210
+
+31
+31307 210r
+
+10131*
+8 (;

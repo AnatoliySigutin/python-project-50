@@ -1,0 +1,5 @@
+from typing import Dict, List, Union
+
+# это форматтер
+
+JsonDict = Dict[str, Union[List[str], "JsonDict"]]

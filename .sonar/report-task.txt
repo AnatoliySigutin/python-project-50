@@ -1,0 +1,7 @@
+organization=anatoliysigutin
+projectKey=AnatoliySigutin_python-project-50
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.78018
+dashboardUrl=https://sonarcloud.io/dashboard?id=AnatoliySigutin_python-project-50
+ceTaskId=AZuOVaRpN810Gp6OLvSY
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZuOVaRpN810Gp6OLvSY

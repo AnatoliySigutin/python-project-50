@@ -1,0 +1,33 @@
+
+"value"str
+
+0int
+
+
+2int
+"  "str
+*!"{indent}{prefix} {key}: {value}"str
+.%"Format simple statuses with prefix."strkey (node (depth ("prefix$ (*list"±-
++
+ (indent"	#binop *#*2*:"
+ 
+ (&	"#array-read#:"
+ 
+( (1"	#binop +#2+:
+V
+T
+ (2value";
++gendiff.programm_command.formatters.stylishformat_value:	'
+%
+   (/"#unknown-value#Blist&
+$
+   (/"
+#is-exact#:Bbool
+
+   (/"
+#assume#:8
+6
+   (/"#set-field# __collection_size:Bint&
+$
+   (/"#array-add-last#:
+   (/*L/home/prank/python-project-50/gendiff/programm_command/formatters/stylish.py

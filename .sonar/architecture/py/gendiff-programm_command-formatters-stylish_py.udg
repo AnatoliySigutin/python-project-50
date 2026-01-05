@@ -1,0 +1,58 @@
+
+1.0PythonFrontend"1767619529992*py2.BÏ
+
+imports1
+
+extends2
+
+returns3
+
+	has param4
+
+module5
+
+
+class6
+
+function7
+3
+.gendiff/programm_command/formatters/stylish.py9
+1
++gendiff.programm_command.formatters.stylish11
+=
+7gendiff.programm_command.formatters.stylish.format_diff12
+@
+:gendiff.programm_command.formatters.stylish.format_updated14
+?
+9gendiff.programm_command.formatters.stylish.format_nested16
+@
+:gendiff.programm_command.formatters.stylish.format_stylish18
+?
+9gendiff.programm_command.formatters.stylish.format_simple20
+>
+8gendiff.programm_command.formatters.stylish.format_value22J
+
+8
+89j¸
+ 
+10
+10115 *
+8 (
+
+13
+13127 210
+
+15
+15147 210
+
+17
+17167 210
+
+19
+19187 210
+
+21
+21207 210
+
+23
+23227 210
