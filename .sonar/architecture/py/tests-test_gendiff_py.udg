@@ -1,5 +1,5 @@
 
-1.0PythonFrontend"1767619529743*py2.BÅ
+1.0PythonFrontend"1767655726020*py2.BÅ
 
 imports1
 
@@ -25,10 +25,10 @@
 test_gendiff.test_json_format14
 *
 $test_gendiff.test_generate_diff_json16
-:
-4test_gendiff.test_generate_diff_identical_files_yaml18
 $
-test_gendiff.test_plain_format20
+test_gendiff.test_plain_format18
+:
+4test_gendiff.test_generate_diff_identical_files_yaml20
 *
 $test_gendiff.test_generate_diff_yaml22
 0

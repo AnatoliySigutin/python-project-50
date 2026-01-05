@@ -54,7 +54,7 @@ Project scanner properties:
   - sonar.scanner.app=python
   - sonar.scanner.appVersion=1.0
   - sonar.scanner.arch=x64
-  - sonar.scanner.bootstrapStartTime=1767619510077
+  - sonar.scanner.bootstrapStartTime=1767655705974
   - sonar.scanner.connectTimeout=5
   - sonar.scanner.javaExePath=/home/prank/.sonar/cache/OpenJDK17U-jre_x64_linux_hotspot_17.0.11_9.tar.gz_unzip/jdk-17.0.11+9-jre/bin/java
   - sonar.scanner.keystorePassword=******

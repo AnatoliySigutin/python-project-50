@@ -23,7 +23,7 @@
 
 msbuild_versionUnknown
  
-peak_used_heap_byte	489107256
+peak_used_heap_byte	747413776
 
 scanner_typepython
 
