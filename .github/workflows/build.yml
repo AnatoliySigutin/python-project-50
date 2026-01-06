@@ -40,7 +40,7 @@ jobs:
         with:
           args: >
             -Dsonar.organization=anatoliysigutin
-            -Dsonar.projectKey=anatoliysigutin
+            -Dsonar.projectKey=AnatoliySigutin_python-project-50
             -Dsonar.python.version=3.12
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.coverage.exclusions=tests/**
