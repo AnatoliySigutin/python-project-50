@@ -1,4 +1,4 @@
-from gendiff.programm_command.main import gendiff_h
+from gendiff.main import gendiff_h
 
 
 def main():

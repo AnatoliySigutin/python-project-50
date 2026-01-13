@@ -1,1 +1,1 @@
-from gendiff.programm_command.compare import generate_diff
+from gendiff.compare import generate_diff

@@ -36,5 +36,5 @@ packages = ["gendiff"]
 
 
 [project.scripts]
-gendiff = 'gendiff.programm_command.scripts.gendiff_compare:main'
-gendiff-h = 'gendiff.programm_command.scripts.gendiff_h:main'
+gendiff = 'gendiff.scripts.gendiff_compare:main'
+gendiff-h = 'gendiff.scripts.gendiff_h:main'

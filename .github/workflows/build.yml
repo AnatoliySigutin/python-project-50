@@ -31,7 +31,7 @@ jobs:
         env:
           PYTHONPATH: .
         run: |
-          pytest --cov=gendiff --cov-report=xml:coverage.xml
+          PYTHONPATH=./ pytest --cov=gendiff --cov-report=xml:coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v3
